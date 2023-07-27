@@ -1,6 +1,7 @@
 import logging
 from urllib.request import urlopen as uReq
 
+import pymongo
 import requests
 from bs4 import BeautifulSoup as bs
 from flask import Flask, jsonify, render_template, request
@@ -82,6 +83,13 @@ def index():
                           "Comment": custComment}
                 reviews.append(mydict)
             logging.info("log my final result {}".format(reviews))
+
+            # MongoDB integration
+            client = pymongo.MongoClient(
+                "mongodb+srv://prashant:Z6BBqU53PIU60BRM@skills-cluster.mzqp9kr.mongodb.net/?retryWrites=true&w=majority")
+            db = client['flipkart-scrapper']
+            collection = db['records']
+            collection.insert_many(reviews)
 
             return render_template("result.html", reviews=reviews[0:(len(reviews) - 1)])
 
