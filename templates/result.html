@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | Flipkart Review Scrapper</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <h1>Reviews</h1>
+    <table cellspacing="0">
+        <tr>
+            <th>Product</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Comment Heading</th>
+            <th>Comments</th>
+        </tr>
+        {% for review in reviews %}
+        <tr>
+            <td>{{review['Product']}}</td>
+            <td>{{review['Name']}}</td>
+            <td>{{review['Rating']}}</td>
+            <td>{{review['CommentHeading']}}</td>
+            <td>{{review['Comments']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
